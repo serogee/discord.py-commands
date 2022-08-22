@@ -38,7 +38,7 @@ class ContextFlagged(ContextStatic):
         super().__init__(message, prefix, trigger, command)
         self.flags = Flags(command.valid_flags, flags)
 
-def anycase(match):
+def anycase(match) -> str:
     group = match.group(1)
     return f"[{group.lower()}{group.upper()}]"
 
@@ -63,4 +63,6 @@ class CommandStatic(Command):
 
     def __init__(self, traceback, parent, aliases: list=EMPTYLIST, mention_as_prefix=False, case_sensitive=False) -> None:
         super().__init__(traceback, parent, aliases, mention_as_prefix, case_sensitive)
-        self.search
+        self.search = re.compile(fr"^[ \n]*({self.triggers_regex})([^ \t\n\u200b]+)?(?:[ \t\n\u200b]+(.+)?)?$", re.DOTALL)
+
+    def process(self, content)
