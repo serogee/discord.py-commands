@@ -2,7 +2,6 @@ import discord
 import os
 import re
 
-EMPTYLIST = list()
 
 class ContextStatic:
 
@@ -44,7 +43,7 @@ def anycase(match) -> str:
 
 class Command:
 
-    def __init__(self, traceback, parent, aliases: list=EMPTYLIST, mention_as_prefix=False, case_sensitive=False) -> None:
+    def __init__(self, traceback, parent, aliases: list=list(), mention_as_prefix=False, case_sensitive=False) -> None:
         self._traceback = traceback
         self.cluster = parent
         self.aliases = aliases
@@ -61,7 +60,7 @@ class Command:
         
 class CommandStatic(Command):
 
-    def __init__(self, traceback, parent, aliases: list=EMPTYLIST, mention_as_prefix=False, case_sensitive=False) -> None:
+    def __init__(self, traceback, parent, aliases: list=list(), mention_as_prefix=False, case_sensitive=False) -> None:
         super().__init__(traceback, parent, aliases, mention_as_prefix, case_sensitive)
         self.search = re.compile(fr"^[ \n]*({self.triggers_regex})([^ \t\n\u200b]+)?(?:[ \t\n\u200b]+(.+)?)?$", re.DOTALL)
 
